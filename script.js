@@ -1,33 +1,26 @@
-let nome = "Nicholas"
+document.addEventListener("DOMContentLoaded", () => {
+    const form = document.getElementById("form-interesse");
+    const input = form.querySelector('input[name="interesse"]');
+    const listContent = document.querySelector(".list__content ul");
+    const interests = [];
 
-if(true) {
-    let sobrenome = "Macedo"
-    console.log("Bem vindo Sr." + nome + " " + sobrenome)
-}
+    form.addEventListener("submit", (event) => {
+        event.preventDefault(); // Evita o comportamento padrão do formulário
 
-console.log("--------------------------------------")
-// console.log(sobrenome)
+        const interest = input.value.trim();
+        if (interest) {
+            interests.push(interest); // Adiciona o interesse ao vetor
+            updateList(); // Atualiza a lista exibida
+            input.value = ""; // Limpa o campo de input
+        }
+    });
 
-// let idade = 32
-// console.log("Idade é " + idade)
-
-
-// if(idade >= 18) {
-//     let sobrenome = "Macedo";
-    
-//     // const deAcordo = window.confirm("Você está de acordo com os termos ?")
-
-//     if(deAcordo) {
-//         // alert("Seja bem-vindo Sr." + nome + " " + sobrenome)
-//     }
-//     // console.log(deAcordo)
-// }
-
-
-
-const deAcordo = window.confirm("Você está de acordo com os termos?")
-console.log(deAcordo)
-
-
-document.write("show!!!")
-// document.write("<h1>Minha primeira manipulação</h1>", "<h1>Minha primeira manipulação</h1>")
+    function updateList() {
+        listContent.innerHTML = ""; // Limpa a lista atual
+        interests.forEach((item) => {
+            const li = document.createElement("li");
+            li.textContent = item;
+            listContent.appendChild(li);
+        });
+    }
+});
